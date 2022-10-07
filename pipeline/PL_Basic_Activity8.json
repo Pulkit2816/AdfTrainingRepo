@@ -1,0 +1,38 @@
+{
+	"name": "PL_Basic_Activity8",
+	"properties": {
+		"activities": [
+			{
+				"name": "Script1",
+				"type": "Script",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "MySqlDb",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": "select * from employee"
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "Basics of ADF"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-10-07T03:53:32Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,58 @@
+{
+	"name": "DS_Source_Data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MyStorageAccount",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"SourceFileName": {
+				"type": "string"
+			},
+			"SourceDirectory": {
+				"type": "string"
+			},
+			"SourceContainer": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().SourceFileName",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().SourceDirectory",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().SourceContainer",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "passengerId",
+				"type": "String"
+			},
+			{
+				"name": "firstName",
+				"type": "String"
+			},
+			{
+				"name": "lastName",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

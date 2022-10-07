@@ -1,0 +1,9 @@
+{
+	"name": "DataFacTraining",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "77408005-98d8-4b1e-8905-7b0571cbe958",
+		"tenantId": "5661c618-23d8-48bb-91c3-75c65e37993d"
+	}
+}

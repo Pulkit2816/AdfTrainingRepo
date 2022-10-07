@@ -1,0 +1,54 @@
+{
+	"name": "PL_Basics_Activity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Append variable1",
+				"type": "AppendVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "NewVariable2",
+					"value": {
+						"value": "Test",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "NewVariable",
+					"value": {
+						"value": "NewValue",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"NewVariable": {
+				"type": "String"
+			},
+			"NewVariable2": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "Basics of ADF"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-10-03T13:51:04Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,95 @@
+{
+	"name": "PL_Basics_Activity2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_Files_List",
+						"type": "DatasetReference",
+						"parameters": {
+							"ContainerName": {
+								"value": "filestore",
+								"type": "Expression"
+							},
+							"FolderName": {
+								"value": "Get_Files_Details",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
+					}
+				}
+			},
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_Files_List",
+						"type": "DatasetReference",
+						"parameters": {
+							"ContainerName": {
+								"value": "filestore",
+								"type": "Expression"
+							},
+							"FolderName": {
+								"value": "Get_Files_Details",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "Basics of ADF"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-10-03T13:51:04Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

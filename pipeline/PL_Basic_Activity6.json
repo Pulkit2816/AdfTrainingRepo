@@ -1,0 +1,149 @@
+{
+	"name": "PL_Basic_Activity6",
+	"properties": {
+		"activities": [
+			{
+				"name": "If Condition1",
+				"description": "",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('IsTrue'), 'true')",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Delete1",
+							"type": "Delete",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "DS_Files_List",
+									"type": "DatasetReference",
+									"parameters": {
+										"ContainerName": {
+											"value": "filestore",
+											"type": "Expression"
+										},
+										"FolderName": {
+											"value": "Get_Files_Details",
+											"type": "Expression"
+										}
+									}
+								},
+								"enableLogging": false,
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Switch1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "IsTrue",
+					"value": {
+						"value": "@pipeline().parameters.SetStatus",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Switch1",
+				"type": "Switch",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"on": {
+						"value": "@pipeline().parameters.SetStatus",
+						"type": "Expression"
+					},
+					"cases": [
+						{
+							"value": "true"
+						},
+						{
+							"value": "false"
+						},
+						{
+							"value": "not"
+						},
+						{
+							"value": "abc",
+							"activities": [
+								{
+									"name": "Fail1",
+									"type": "Fail",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"message": "abc",
+										"errorCode": "402"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"SetStatus": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"IsTrue": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Basics of ADF"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-10-06T17:39:45Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
