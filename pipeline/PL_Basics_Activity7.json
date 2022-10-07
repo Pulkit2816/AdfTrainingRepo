@@ -82,7 +82,44 @@
 										"type": "JsonWriteSettings"
 									}
 								},
-								"enableStaging": false
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['country']"
+											},
+											"sink": {
+												"path": "$['country']"
+											}
+										},
+										{
+											"source": {
+												"path": "$['name']"
+											},
+											"sink": {
+												"path": "$['name']"
+											}
+										},
+										{
+											"source": {
+												"path": "$['state-province']"
+											},
+											"sink": {
+												"path": "$['state-province']"
+											}
+										},
+										{
+											"source": {
+												"path": "$['alpha_two_code']"
+											},
+											"sink": {
+												"path": "$['alpha_two_code']"
+											}
+										}
+									]
+								}
 							},
 							"inputs": [
 								{
