@@ -89,7 +89,8 @@
 		],
 		"parameters": {
 			"SourceFileName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "abc"
 			},
 			"SourceDirectory": {
 				"type": "string"
