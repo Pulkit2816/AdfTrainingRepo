@@ -73,14 +73,7 @@
 			{
 				"name": "Set variable1",
 				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Switch1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "IsTrue",
@@ -88,44 +81,6 @@
 						"value": "@pipeline().parameters.SetStatus",
 						"type": "Expression"
 					}
-				}
-			},
-			{
-				"name": "Switch1",
-				"type": "Switch",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"on": {
-						"value": "@pipeline().parameters.SetStatus",
-						"type": "Expression"
-					},
-					"cases": [
-						{
-							"value": "true"
-						},
-						{
-							"value": "false"
-						},
-						{
-							"value": "not"
-						},
-						{
-							"value": "abc",
-							"activities": [
-								{
-									"name": "Fail1",
-									"type": "Fail",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"message": "abc",
-										"errorCode": "402"
-									}
-								}
-							]
-						}
-					]
 				}
 			}
 		],
